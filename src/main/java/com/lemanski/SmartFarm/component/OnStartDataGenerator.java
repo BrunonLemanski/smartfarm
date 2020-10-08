@@ -1,7 +1,8 @@
 package com.lemanski.SmartFarm.component;
 
-import com.lemanski.SmartFarm.model.Animal;
-import com.lemanski.SmartFarm.model.Treatment;
+import com.lemanski.SmartFarm.model.database.Animal;
+import com.lemanski.SmartFarm.model.AnimalType;
+import com.lemanski.SmartFarm.model.database.Treatment;
 import com.lemanski.SmartFarm.repository.AnimalRepository;
 import com.lemanski.SmartFarm.repository.TreatmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class OnStartDataGenerator {
         animal.setGender("XY");
         animal.setPurchaseCost(1400.0);
         animal.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 11, 23));
+        animal.setType(AnimalType.COW);
 
         Animal animal1 = new Animal();
         animal1.setName("Krasna1");
@@ -39,9 +41,10 @@ public class OnStartDataGenerator {
         animal1.setGender("XY");
         animal1.setPurchaseCost(1400.0);
         animal1.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 8, 26));
+        animal1.setType(AnimalType.COW);
 
         Animal animal2 = new Animal();
-        animal2.setName("Krasna3");
+        animal2.setName("Ferdek");
         animal2.setIdPassport("0921312555");
         animal2.setOriginCountry("PL");
         animal2.setRace("Charolaise");
@@ -49,6 +52,18 @@ public class OnStartDataGenerator {
         animal2.setGender("XY");
         animal2.setPurchaseCost(1400.0);
         animal2.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 20,00));
+        animal2.setType(AnimalType.BULL);
+
+        Animal animal3 = new Animal();
+        animal3.setName("Ferdek2");
+        animal3.setIdPassport("0921312585");
+        animal3.setOriginCountry("PL");
+        animal3.setRace("Charolaise");
+        animal3.setBirthDate(LocalDateTime.of(2019, 05, 21, 19, 56));
+        animal3.setGender("XY");
+        animal3.setPurchaseCost(1400.0);
+        animal3.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 20,00));
+        animal3.setType(AnimalType.CALF);
 
         Treatment treatment = new Treatment();
         treatment.setMedicineName("NazwaLekarstwa");
@@ -83,6 +98,7 @@ public class OnStartDataGenerator {
         animalRepository.save(animal);
         animalRepository.save(animal1);
         animalRepository.save(animal2);
+        animalRepository.save(animal3);
 
         treatmentRepository.save(treatment);
         treatmentRepository.save(treatment1);

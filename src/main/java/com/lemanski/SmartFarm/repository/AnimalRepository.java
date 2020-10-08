@@ -1,6 +1,6 @@
 package com.lemanski.SmartFarm.repository;
 
-import com.lemanski.SmartFarm.model.Animal;
+import com.lemanski.SmartFarm.model.database.Animal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

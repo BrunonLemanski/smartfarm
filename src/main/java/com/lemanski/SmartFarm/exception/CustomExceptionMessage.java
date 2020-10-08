@@ -1,4 +1,11 @@
 package com.lemanski.SmartFarm.exception;
 
-public class CustomExceptionMessage {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class CustomExceptionMessage extends RuntimeException{
+    public CustomExceptionMessage(String message) {
+        super(message);
+    }
 }

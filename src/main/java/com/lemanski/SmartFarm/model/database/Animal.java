@@ -1,7 +1,8 @@
-package com.lemanski.SmartFarm.model;
+package com.lemanski.SmartFarm.model.database;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.lemanski.SmartFarm.model.AnimalType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
