@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,14 +24,17 @@ public class Animal {
     @Size(max = 2)
     private String gender;
 
-    @JsonFormat(pattern = "dd-mm-yyyy")
-    private LocalDate purchaseDate;
+    @Enumerated(EnumType.STRING)
+    private AnimalType type; //cow, bull, calf
 
     @JsonFormat(pattern = "dd-mm-yyyy")
-    private LocalDate dischargeDate;
+    private LocalDateTime purchaseDate;
 
     @JsonFormat(pattern = "dd-mm-yyyy")
-    private LocalDate birthDate;
+    private LocalDateTime dischargeDate;
+
+    @JsonFormat(pattern = "dd-mm-yyyy")
+    private LocalDateTime birthDate;
 
     private Double purchaseCost;
 
@@ -42,8 +44,7 @@ public class Animal {
     @Size(max = 2)
     private String originCountry;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "treatment_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "animal")
     private List<Treatment> treatments;
 
     private LocalDateTime createdOn;
@@ -84,27 +85,27 @@ public class Animal {
         this.gender = gender;
     }
 
-    public LocalDate getPurchaseDate() {
+    public LocalDateTime getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDate purchaseDate) {
+    public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
-    public LocalDate getDischargeDate() {
+    public LocalDateTime getDischargeDate() {
         return dischargeDate;
     }
 
-    public void setDischargeDate(LocalDate dischargeDate) {
+    public void setDischargeDate(LocalDateTime dischargeDate) {
         this.dischargeDate = dischargeDate;
     }
 
-    public LocalDate getBirthDate() {
+    public LocalDateTime getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(LocalDateTime birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -154,6 +155,33 @@ public class Animal {
 
     public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
+    }
+
+    public AnimalType getType() {
+        return type;
+    }
+
+    public void setType(AnimalType type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", idPassport='" + idPassport + '\'' +
+                ", gender='" + gender + '\'' +
+                ", type=" + type +
+                ", purchaseDate=" + purchaseDate +
+                ", dischargeDate=" + dischargeDate +
+                ", birthDate=" + birthDate +
+                ", purchaseCost=" + purchaseCost +
+                ", race='" + race + '\'' +
+                ", originCountry='" + originCountry + '\'' +
+                ", createdOn=" + createdOn +
+                ", updatedOn=" + updatedOn +
+                '}';
     }
 
     @PrePersist

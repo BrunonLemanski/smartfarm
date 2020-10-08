@@ -7,17 +7,16 @@ import com.lemanski.SmartFarm.repository.TreatmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.util.stream.Stream;
+import java.time.LocalDateTime;
 
 @Component
-public class Start {
+public class OnStartDataGenerator {
 
     private AnimalRepository animalRepository;
     private TreatmentRepository treatmentRepository;
 
     @Autowired
-    public Start(AnimalRepository animalRepository, TreatmentRepository treatmentRepository) {
+    public OnStartDataGenerator(AnimalRepository animalRepository, TreatmentRepository treatmentRepository) {
         this.animalRepository = animalRepository;
         this.treatmentRepository = treatmentRepository;
 
@@ -26,54 +25,58 @@ public class Start {
         animal.setIdPassport("0921312515");
         animal.setOriginCountry("PL");
         animal.setRace("Charolaise");
-        animal.setBirthDate(LocalDate.of(2019, 05, 21));
+        animal.setBirthDate(LocalDateTime.of(2019, 05, 21, 11, 56));
         animal.setGender("XY");
         animal.setPurchaseCost(1400.0);
-        animal.setPurchaseDate(LocalDate.of(2019, 07, 01 ));
+        animal.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 11, 23));
 
         Animal animal1 = new Animal();
         animal1.setName("Krasna1");
         animal1.setIdPassport("0921312525");
         animal1.setOriginCountry("PL");
         animal1.setRace("Charolaise");
-        animal1.setBirthDate(LocalDate.of(2019, 05, 21));
+        animal1.setBirthDate(LocalDateTime.of(2019, 05, 21, 9, 12));
         animal1.setGender("XY");
         animal1.setPurchaseCost(1400.0);
-        animal1.setPurchaseDate(LocalDate.of(2019, 07, 01 ));
+        animal1.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 8, 26));
 
         Animal animal2 = new Animal();
         animal2.setName("Krasna3");
         animal2.setIdPassport("0921312555");
         animal2.setOriginCountry("PL");
         animal2.setRace("Charolaise");
-        animal2.setBirthDate(LocalDate.of(2019, 05, 21));
+        animal2.setBirthDate(LocalDateTime.of(2019, 05, 21, 19, 56));
         animal2.setGender("XY");
         animal2.setPurchaseCost(1400.0);
-        animal2.setPurchaseDate(LocalDate.of(2019, 07, 01 ));
+        animal2.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 20,00));
 
         Treatment treatment = new Treatment();
         treatment.setMedicineName("NazwaLekarstwa");
         treatment.setComment("Sredni stan, podawac przez 2 tygodnie");
-        treatment.setDisease("Zapalenie płusc");
-        treatment.setTreatmentDate(LocalDate.of(2020, 01, 05));
+        treatment.setDisease("Zapalenie płuc");
+        treatment.setTreatmentDate(LocalDateTime.of(2020, 01, 05, 20, 00));
+        treatment.setAnimal(animal);
 
         Treatment treatment1 = new Treatment();
         treatment1.setMedicineName("NazwaLekarstwa");
         treatment1.setComment("Sredni stan, podawac przez 2 tygodnie");
-        treatment1.setDisease("Zapalenie płusc");
-        treatment1.setTreatmentDate(LocalDate.of(2020, 01, 05));
+        treatment1.setDisease("Zapalenie płuc");
+        treatment1.setTreatmentDate(LocalDateTime.of(2020, 01, 05, 20, 00));
+        treatment1.setAnimal(animal);
 
         Treatment treatment2 = new Treatment();
         treatment2.setMedicineName("NazwaLekarstwa");
         treatment2.setComment("Sredni stan, podawac przez 2 tygodnie");
-        treatment2.setDisease("Zapalenie płusc");
-        treatment2.setTreatmentDate(LocalDate.of(2020, 01, 05));
+        treatment2.setDisease("Zapalenie płuc");
+        treatment2.setTreatmentDate(LocalDateTime.of(2020, 01, 05, 20, 00));
+        treatment2.setAnimal(animal1);
 
         Treatment treatment3 = new Treatment();
         treatment3.setMedicineName("NazwaLekarstwa");
         treatment3.setComment("Sredni stan, podawac przez 2 tygodnie");
-        treatment3.setDisease("Zapalenie płusc");
-        treatment3.setTreatmentDate(LocalDate.of(2020, 01, 05));
+        treatment3.setDisease("Zapalenie płuc");
+        treatment3.setTreatmentDate(LocalDateTime.of(2020, 01, 05, 20, 00));
+        treatment3.setAnimal(animal2);
 
         //animal.setTreatments(Stream.of(cure -> cure.));
 

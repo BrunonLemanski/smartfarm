@@ -1,15 +1,13 @@
 package com.lemanski.SmartFarm.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
 public class Treatment {
 
     @Id
@@ -23,14 +21,26 @@ public class Treatment {
     private String disease;
 
     @JsonFormat(pattern = "dd-mm-yyyy")
-    private LocalDate treatmentDate;
+    private LocalDateTime treatmentDate;
 
     private String comment;
 
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 
+    @ManyToOne
+    @JsonIgnore
+    private Animal animal;
+
     public Treatment() {
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 
     public Long getId() {
@@ -57,11 +67,11 @@ public class Treatment {
         this.disease = disease;
     }
 
-    public LocalDate getTreatmentDate() {
+    public LocalDateTime getTreatmentDate() {
         return treatmentDate;
     }
 
-    public void setTreatmentDate(LocalDate treatmentDate) {
+    public void setTreatmentDate(LocalDateTime treatmentDate) {
         this.treatmentDate = treatmentDate;
     }
 
@@ -87,6 +97,19 @@ public class Treatment {
 
     public void setUpdatedOn(LocalDateTime updatedOn) {
         this.updatedOn = updatedOn;
+    }
+
+    @Override
+    public String toString() {
+        return "Treatment{" +
+                "id=" + id +
+                ", medicineName='" + medicineName + '\'' +
+                ", disease='" + disease + '\'' +
+                ", treatmentDate=" + treatmentDate +
+                ", comment='" + comment + '\'' +
+                ", createdOn=" + createdOn +
+                ", updatedOn=" + updatedOn +
+                '}';
     }
 
     @PrePersist
