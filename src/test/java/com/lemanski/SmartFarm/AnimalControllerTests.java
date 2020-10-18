@@ -4,6 +4,7 @@ import com.lemanski.SmartFarm.controller.AnimalController;
 import com.lemanski.SmartFarm.exception.CustomExceptionMessage;
 import com.lemanski.SmartFarm.model.database.Animal;
 import com.lemanski.SmartFarm.service.AnimalService;
+import com.lemanski.SmartFarm.service.ValidationErrorService;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,6 +42,9 @@ public class AnimalControllerTests {
     @MockBean
     private AnimalService animalService;
 
+    @MockBean
+    private ValidationErrorService errorService; // it's not used by required to run test
+
 
     @Before
     public void setUp() {
@@ -75,6 +79,30 @@ public class AnimalControllerTests {
                 .andExpect(status().isNotFound())
                 .andExpect(mvcResult -> Assert.assertTrue(mvcResult.getResolvedException() instanceof CustomExceptionMessage))
                 .andExpect(mvcResult -> Assert.assertEquals("There are no animals in your base.", mvcResult.getResolvedException().getMessage()));
+    }
+
+    @Test
+    public void givenAnimal_whenGetAnimal_thenStatus200andJsonArray() throws Exception {
+        Animal animal = createTestingData_Animal("Mucka");
+
+        given(animalService.getAnimal(1L)).willReturn(java.util.Optional.ofNullable(animal));
+
+        mockMvc.perform(get("/animals/1")
+            .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.name", Matchers.is("Mucka")));
+    }
+
+    @Test
+    public void givenErrorMessage_whenGetAnimal_thenStatus404() throws Exception {
+        when(animalService.getAnimal(5L)).thenThrow(new CustomExceptionMessage("There is no animal with id: 5."));
+
+        mockMvc.perform(get("/animals/5")
+            .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(mvcResult -> Assert.assertTrue(mvcResult.getResolvedException() instanceof CustomExceptionMessage))
+                .andExpect(mvcResult -> Assert.assertEquals("There is no animal with id: 5.", mvcResult.getResolvedException().getMessage()));
     }
 
     private Animal createTestingData_Animal(String name){

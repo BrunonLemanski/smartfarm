@@ -23,9 +23,11 @@ public class Animal {
     private String idPassport;
 
     @Size(max = 2)
+    @NotNull(message = "Gender is required.")
     private String gender;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Animal type is required.")
     private AnimalType type; //cow, bull, calf
 
     @JsonFormat(pattern = "dd-mm-yyyy")
@@ -43,6 +45,7 @@ public class Animal {
     private String race;
 
     @Size(max = 2)
+    @NotNull(message = "Origin country is required.")
     private String originCountry;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "animal")
