@@ -1,6 +1,5 @@
-package com.lemanski.SmartFarm;
+package com.lemanski.SmartFarm.controller;
 
-import com.lemanski.SmartFarm.controller.AnimalController;
 import com.lemanski.SmartFarm.exception.CustomExceptionMessage;
 import com.lemanski.SmartFarm.model.database.Animal;
 import com.lemanski.SmartFarm.service.AnimalService;

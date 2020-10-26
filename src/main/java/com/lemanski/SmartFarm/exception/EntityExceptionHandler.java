@@ -17,4 +17,10 @@ public class EntityExceptionHandler extends ResponseEntityExceptionHandler {
         CustomExceptionMessageResponse exception = new CustomExceptionMessageResponse(ex.getMessage());
         return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public final ResponseEntity<CustomExceptionMessageResponse> handleNotFoundAnimalException(NotFoundAnimalException ex, WebRequest request) {
+        CustomExceptionMessageResponse exception = new CustomExceptionMessageResponse(ex.getMessage());
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+    }
 }
