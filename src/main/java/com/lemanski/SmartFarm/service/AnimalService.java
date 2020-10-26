@@ -33,8 +33,13 @@ public class AnimalService {
 
     public Animal saveAnimal(Animal animal) {
         try {
-            //TODO: walidacja typu zwierzęcia, -> ENUM
-            return animalRepository.save(animal);
+            if(animal.getType().equals(AnimalType.BULL)
+                    || animal.getType().equals(AnimalType.COW)
+                    || animal.getType().equals(AnimalType.CALF)){
+                return animalRepository.save(animal);
+            } else {
+                throw new CustomExceptionMessage("Invalid animal type on input. Please use only COW, CALF or BULL.");
+            }
         } catch (Exception e) {
             throw new CustomExceptionMessage("This with this ID already exist in your base.");
         }

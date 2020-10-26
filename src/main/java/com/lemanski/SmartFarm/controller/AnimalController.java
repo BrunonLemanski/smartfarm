@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 
 @RestController
@@ -43,10 +42,7 @@ public class AnimalController {
         if (errorMap != null) {
             return errorMap;
         }
-
-        animalService.saveAnimal(animal);
-
-        return new ResponseEntity<>(animal, HttpStatus.CREATED);
+        Animal animal1 = animalService.saveAnimal(animal);
+        return new ResponseEntity<>(animal1, HttpStatus.CREATED);
     }
-
 }

@@ -8,6 +8,7 @@ import com.lemanski.SmartFarm.repository.TreatmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
@@ -69,28 +70,28 @@ public class OnStartDataGenerator {
         treatment.setMedicineName("NazwaLekarstwa");
         treatment.setComment("Sredni stan, podawac przez 2 tygodnie");
         treatment.setDisease("Zapalenie płuc");
-        treatment.setTreatmentDate(LocalDateTime.of(2020, 01, 05, 20, 00));
+        treatment.setTreatmentDate(LocalDate.of(2020, 01, 05));
         treatment.setAnimal(animal);
 
         Treatment treatment1 = new Treatment();
         treatment1.setMedicineName("NazwaLekarstwa");
         treatment1.setComment("Sredni stan, podawac przez 2 tygodnie");
         treatment1.setDisease("Zapalenie płuc");
-        treatment1.setTreatmentDate(LocalDateTime.of(2020, 01, 05, 20, 00));
+        treatment1.setTreatmentDate(LocalDate.of(2020, 01, 05));
         treatment1.setAnimal(animal);
 
         Treatment treatment2 = new Treatment();
         treatment2.setMedicineName("NazwaLekarstwa");
         treatment2.setComment("Sredni stan, podawac przez 2 tygodnie");
         treatment2.setDisease("Zapalenie płuc");
-        treatment2.setTreatmentDate(LocalDateTime.of(2020, 01, 05, 20, 00));
+        treatment2.setTreatmentDate(LocalDate.of(2020, 01, 05));
         treatment2.setAnimal(animal1);
 
         Treatment treatment3 = new Treatment();
         treatment3.setMedicineName("NazwaLekarstwa");
         treatment3.setComment("Sredni stan, podawac przez 2 tygodnie");
         treatment3.setDisease("Zapalenie płuc");
-        treatment3.setTreatmentDate(LocalDateTime.of(2020, 01, 05, 20, 00));
+        treatment3.setTreatmentDate(LocalDate.of(2020, 01, 05));
         treatment3.setAnimal(animal2);
 
         //animal.setTreatments(Stream.of(cure -> cure.));

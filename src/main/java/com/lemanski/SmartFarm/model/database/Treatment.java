@@ -2,10 +2,10 @@ package com.lemanski.SmartFarm.model.database;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lemanski.SmartFarm.model.database.Animal;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,12 +21,14 @@ public class Treatment {
     @NotNull(message = "Name of disease is required.")
     private String disease;
 
-    @JsonFormat(pattern = "dd-mm-yyyy")
-    private LocalDateTime treatmentDate;
+    private LocalDate treatmentDate; //ex. 2020-05-01
 
     private String comment;
 
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime createdOn;
+
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime updatedOn;
 
     @ManyToOne
@@ -68,11 +70,11 @@ public class Treatment {
         this.disease = disease;
     }
 
-    public LocalDateTime getTreatmentDate() {
+    public LocalDate getTreatmentDate() {
         return treatmentDate;
     }
 
-    public void setTreatmentDate(LocalDateTime treatmentDate) {
+    public void setTreatmentDate(LocalDate treatmentDate) {
         this.treatmentDate = treatmentDate;
     }
 
