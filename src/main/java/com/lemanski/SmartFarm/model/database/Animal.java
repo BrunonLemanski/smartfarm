@@ -51,6 +51,9 @@ public class Animal {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "animal")
     private List<Treatment> treatments;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "animal")
+    private List<AnimalCost> animalCosts;
+
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 
@@ -167,6 +170,14 @@ public class Animal {
 
     public void setType(AnimalType type) {
         this.type = type;
+    }
+
+    public List<AnimalCost> getAnimalCosts() {
+        return animalCosts;
+    }
+
+    public void setAnimalCosts(List<AnimalCost> animalCosts) {
+        this.animalCosts = animalCosts;
     }
 
     @Override

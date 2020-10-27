@@ -1,10 +1,12 @@
 package com.lemanski.SmartFarm.controller;
 
+import com.lemanski.SmartFarm.exception.CustomExceptionMessage;
 import com.lemanski.SmartFarm.model.AnimalType;
 import com.lemanski.SmartFarm.model.database.Animal;
 import com.lemanski.SmartFarm.model.database.Treatment;
 import com.lemanski.SmartFarm.service.TreatmentService;
 import com.lemanski.SmartFarm.service.ValidationErrorService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +28,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -67,8 +70,33 @@ public class TreatmentControllerTest {
                 .andExpect(jsonPath("$[0].medicineName", is("Penicylina")));
     }
 
+    @Test
+    public void givenErrorMessage_whenGetAllTreatments_thenStatus404() throws Exception {
+        when(treatmentService.getAllTreatments()).thenThrow(new CustomExceptionMessage("There is no treatments in your base."));
+
+        mockMvc.perform(get("/treatments")
+            .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(mvcResult -> Assert.assertTrue(mvcResult.getResolvedException() instanceof CustomExceptionMessage))
+                .andExpect(mvcResult -> Assert.assertEquals("There is no treatments in your base.", mvcResult.getResolvedException().getMessage()));
+    }
+
+    @Test
+    public void givenTreatment_whenGetTreatmentForAnimal_thenStatus200andObject() throws Exception {
+        Treatment treatment = createTreatment("Lek");
+
+        given(treatmentService.getTreatment(1L, 1L)).willReturn(treatment);
+
+        mockMvc.perform(get("/animals/treatment?animalId=1&treatmentId=1")
+            .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.medicineName", is("Lek")));
+    }
+
     private Treatment createTreatment(String medicineName) {
         Animal animal = new Animal();
+        animal.setId(1L);
         animal.setName("Hufky");
         animal.setType(AnimalType.COW);
         animal.setIdPassport("0921312515");
@@ -81,6 +109,7 @@ public class TreatmentControllerTest {
 
 
         Treatment treatment = new Treatment();
+        treatment.setId(1L);
         treatment.setMedicineName(medicineName);
         treatment.setComment("Comment Testing TreatmentController");
         treatment.setDisease("Example Disease");
