@@ -7,6 +7,7 @@ import com.lemanski.SmartFarm.model.AnimalType;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,14 +31,11 @@ public class Animal {
     @NotNull(message = "Animal type is required.")
     private AnimalType type; //cow, bull, calf
 
-    @JsonFormat(pattern = "dd-mm-yyyy")
-    private LocalDateTime purchaseDate;
+    private LocalDate purchaseDate;
 
-    @JsonFormat(pattern = "dd-mm-yyyy")
-    private LocalDateTime dischargeDate;
+    private LocalDate dischargeDate;
 
-    @JsonFormat(pattern = "dd-mm-yyyy")
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 
     private Double purchaseCost;
 
@@ -48,10 +46,10 @@ public class Animal {
     @NotNull(message = "Origin country is required.")
     private String originCountry;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "animal")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "animal", orphanRemoval = true)
     private List<Treatment> treatments;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "animal")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "animal", orphanRemoval = true)
     private List<AnimalCost> animalCosts;
 
     private LocalDateTime createdOn;
@@ -92,27 +90,27 @@ public class Animal {
         this.gender = gender;
     }
 
-    public LocalDateTime getPurchaseDate() {
+    public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDateTime purchaseDate) {
+    public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
-    public LocalDateTime getDischargeDate() {
+    public LocalDate getDischargeDate() {
         return dischargeDate;
     }
 
-    public void setDischargeDate(LocalDateTime dischargeDate) {
+    public void setDischargeDate(LocalDate dischargeDate) {
         this.dischargeDate = dischargeDate;
     }
 
-    public LocalDateTime getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDateTime birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

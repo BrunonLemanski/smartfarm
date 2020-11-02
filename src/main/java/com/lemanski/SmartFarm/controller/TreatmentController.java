@@ -39,4 +39,5 @@ public class TreatmentController {
         Treatment treatment1 = treatmentService.saveTreatment(Long.parseLong(animalId), treatment);
         return new ResponseEntity<>(treatment1, HttpStatus.CREATED);
     }
+
 }

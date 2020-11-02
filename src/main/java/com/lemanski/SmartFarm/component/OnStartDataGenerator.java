@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Component
 public class OnStartDataGenerator {
@@ -27,10 +26,10 @@ public class OnStartDataGenerator {
         animal.setIdPassport("0921312515");
         animal.setOriginCountry("PL");
         animal.setRace("Charolaise");
-        animal.setBirthDate(LocalDateTime.of(2019, 05, 21, 11, 56));
+        animal.setBirthDate(LocalDate.of(2019, 05, 21));
         animal.setGender("XY");
         animal.setPurchaseCost(1400.0);
-        animal.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 11, 23));
+        animal.setPurchaseDate(LocalDate.of(2019, 07, 01));
         animal.setType(AnimalType.COW);
 
         Animal animal1 = new Animal();
@@ -38,10 +37,10 @@ public class OnStartDataGenerator {
         animal1.setIdPassport("0921312525");
         animal1.setOriginCountry("PL");
         animal1.setRace("Charolaise");
-        animal1.setBirthDate(LocalDateTime.of(2019, 05, 21, 9, 12));
+        animal1.setBirthDate(LocalDate.of(2019, 05, 21));
         animal1.setGender("XY");
         animal1.setPurchaseCost(1400.0);
-        animal1.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 8, 26));
+        animal1.setPurchaseDate(LocalDate.of(2019, 07, 01));
         animal1.setType(AnimalType.COW);
 
         Animal animal2 = new Animal();
@@ -49,10 +48,10 @@ public class OnStartDataGenerator {
         animal2.setIdPassport("0921312555");
         animal2.setOriginCountry("PL");
         animal2.setRace("Charolaise");
-        animal2.setBirthDate(LocalDateTime.of(2019, 05, 21, 19, 56));
+        animal2.setBirthDate(LocalDate.of(2019, 05, 21));
         animal2.setGender("XY");
         animal2.setPurchaseCost(1400.0);
-        animal2.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 20,00));
+        animal2.setPurchaseDate(LocalDate.of(2019, 07, 01));
         animal2.setType(AnimalType.BULL);
 
         Animal animal3 = new Animal();
@@ -60,10 +59,10 @@ public class OnStartDataGenerator {
         animal3.setIdPassport("0921312585");
         animal3.setOriginCountry("PL");
         animal3.setRace("Charolaise");
-        animal3.setBirthDate(LocalDateTime.of(2019, 05, 21, 19, 56));
+        animal3.setBirthDate(LocalDate.of(2019, 05, 21));
         animal3.setGender("XY");
         animal3.setPurchaseCost(1400.0);
-        animal3.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 20,00));
+        animal3.setPurchaseDate(LocalDate.of(2019, 07, 01));
         animal3.setType(AnimalType.CALF);
 
         Treatment treatment = new Treatment();

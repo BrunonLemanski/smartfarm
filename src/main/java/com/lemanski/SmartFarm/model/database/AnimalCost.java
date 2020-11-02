@@ -33,6 +33,7 @@ public class AnimalCost {
     private Animal animal;
 
     public AnimalCost() {
+
     }
 
     public Long getId() {

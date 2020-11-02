@@ -7,6 +7,8 @@ import com.lemanski.SmartFarm.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -31,20 +33,6 @@ public class AnimalService {
         }
     }
 
-    public Animal saveAnimal(Animal animal) {
-        try {
-            if(animal.getType().equals(AnimalType.BULL)
-                    || animal.getType().equals(AnimalType.COW)
-                    || animal.getType().equals(AnimalType.CALF)){
-                return animalRepository.save(animal);
-            } else {
-                throw new CustomExceptionMessage("Invalid animal type on input. Please use only COW, CALF or BULL.");
-            }
-        } catch (Exception e) {
-            throw new CustomExceptionMessage("This with this ID already exist in your base.");
-        }
-    }
-
     public Optional<Animal> getAnimal(Long id) {
         Optional<Animal> animal = animalRepository.findById(id);
 
@@ -52,6 +40,36 @@ public class AnimalService {
             return animal;
         } else {
             throw new CustomExceptionMessage("There is no animal with id: " + id + ".");
+        }
+    }
+
+    public Animal saveAnimal(Animal animal, Optional<Long> animalId) {
+        try {
+            if(animal.getType().equals(AnimalType.BULL)
+                    || animal.getType().equals(AnimalType.COW)
+                    || animal.getType().equals(AnimalType.CALF)){
+
+                animalId.ifPresent(animal::setId);
+
+                if(animalId.isPresent()) {
+                    LocalDateTime createdOn = animalRepository.findById(animalId.get()).get().getCreatedOn();
+                    animal.setCreatedOn(createdOn);
+                }
+
+                return animalRepository.save(animal);
+            } else {
+                throw new CustomExceptionMessage("Invalid animal type on input. Please use only COW, CALF or BULL.");
+            }
+        } catch (Exception e) {
+            throw new CustomExceptionMessage("Animal with this ID already exist in your base.");
+        }
+    }
+
+    public void deleteAnimal(Long id) {
+        try{
+            animalRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new CustomExceptionMessage("Animal does not exist in database.");
         }
     }
 }

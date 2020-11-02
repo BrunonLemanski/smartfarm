@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -110,10 +110,10 @@ public class AnimalControllerTests {
         animal.setIdPassport("0921312515");
         animal.setOriginCountry("PL");
         animal.setRace("Charolaise");
-        animal.setBirthDate(LocalDateTime.of(2019, 05, 21, 11, 56));
+        animal.setBirthDate(LocalDate.of(2019, 05, 21));
         animal.setGender("XY");
         animal.setPurchaseCost(1400.0);
-        animal.setPurchaseDate(LocalDateTime.of(2019, 07, 01, 11, 23));
+        animal.setPurchaseDate(LocalDate.of(2019, 07, 01));
 
         return animal;
     }

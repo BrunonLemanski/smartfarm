@@ -10,6 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -42,7 +45,29 @@ public class AnimalController {
         if (errorMap != null) {
             return errorMap;
         }
-        Animal animal1 = animalService.saveAnimal(animal);
+        Animal animal1 = animalService.saveAnimal(animal, null);
         return new ResponseEntity<>(animal1, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateAnimal(@Valid @RequestBody Animal animal, @PathVariable Long id, BindingResult result) {
+        ResponseEntity<?> errorMap = errorService.validation(result);
+
+        if (errorMap != null) {
+            return errorMap;
+        }
+
+        Animal animal1 = animalService.saveAnimal(animal, Optional.ofNullable(id));
+        return new ResponseEntity<>(animal1, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAnimal(@PathVariable Long id) {
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("message", "Animal with ID " + id.toString() + " was deleted.");
+
+        animalService.deleteAnimal(id);
+
+        return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }
 }
