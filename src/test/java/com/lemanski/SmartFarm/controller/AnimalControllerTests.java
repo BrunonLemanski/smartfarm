@@ -42,8 +42,7 @@ public class AnimalControllerTests {
     private AnimalService animalService;
 
     @MockBean
-    private ValidationErrorService errorService; // it's not used by required to run test
-
+    private ValidationErrorService errorService;
 
     @Before
     public void setUp() {
@@ -114,7 +113,6 @@ public class AnimalControllerTests {
         animal.setGender("XY");
         animal.setPurchaseCost(1400.0);
         animal.setPurchaseDate(LocalDate.of(2019, 07, 01));
-
         return animal;
     }
 }

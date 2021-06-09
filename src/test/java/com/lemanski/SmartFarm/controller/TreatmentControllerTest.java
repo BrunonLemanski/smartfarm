@@ -107,7 +107,6 @@ public class TreatmentControllerTest {
         animal.setPurchaseCost(1400.0);
         animal.setPurchaseDate(LocalDate.of(2019, 07, 01));
 
-
         Treatment treatment = new Treatment();
         treatment.setId(1L);
         treatment.setMedicineName(medicineName);
